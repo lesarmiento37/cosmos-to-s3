@@ -18,5 +18,14 @@ iamRoleCosmosToS3LambdaFunction:
               Action:
                 - 'logs:*'
               Resource: 'arn:aws:logs:*:*:*'
+      - PolicyName: "inline_policy_lambda_function_ssm"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - 'ssm:*'
+              Resource: 
+                - "*"  
 
 

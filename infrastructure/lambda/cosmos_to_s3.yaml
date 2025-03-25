@@ -5,9 +5,6 @@
     name: cosmos-to-s3-lambda-function
     role: iamRoleCosmosToS3LambdaFunction
     environment:
-      REGION: ${env:REGION}
-      LOG_LEVEL: ${env:LOG_LEVEL}
-      LOG_FORMAT: ${env:LOG_FORMAT}
       COSMOS_CONNECTION_STRING: ${ssm:COSMOS_CONNECTION_STRING~true}
       S3_BUCKET_NAME: ${ssm:S3_BUCKET_NAME~true}
       DATABASE_NAME: cosmicworks
