@@ -1,0 +1,51 @@
+service: cosmos-to-s3-lambda-function
+useDotenv: true
+#comment
+frameworkVersion: '3'
+
+plugins:
+  - serverless-dotenv-plugin
+ # - serverless-plugin-log-retention
+  - serverless-prune-plugin
+  - serverless-step-functions
+  - serverless-plugin-aws-alerts
+  - serverless-plugin-split-stacks
+  - serverless-python-requirements
+custom:
+  environments:
+    develop: 'develop'
+  businessImpact:
+    develop: 'develop'
+  prune:
+    automatic: true
+    includeLayers: true
+    number: ${env:PRUNE_NUMBER}
+  pythonRequirements:
+    dockerizePip: true
+    useStaticCache: false 
+  serviceTags:
+    Managed-by: 'serverless-framework'
+    Team: 'Leonardo Sarmiento'
+    Country: 'Colombia'
+    Owner: 'Leonardo Sarmiento'
+  dotenv:
+    include: none
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: python3.10
+  runtimeManagement: auto 
+  region: ${env:REGION}
+  stackName: ${self:service}
+  stage: ${opt:stage, 'default'}
+  memorySize: 512
+  timeout: ${env:TIMEOUT}
+  logRetentionInDays: ${env:LOGS_RETENTION_DAYS}
+  stackTags: ${self:custom.serviceTags}
+resources:
+  Resources:
+    iamRoleCosmosToS3LambdaFunction: ${file(infrastructure/iam/lambda/iam_cosmos_to_s3.yaml):iamRoleCosmosToS3LambdaFunction}
+functions:
+  - ${file(infrastructure/lambda/cosmos_to_s3.yaml)}

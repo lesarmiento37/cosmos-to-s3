@@ -1,0 +1,22 @@
+iamRoleCosmosToS3LambdaFunction:
+  Type: 'AWS::IAM::Role'
+  Properties:
+    RoleName: iamRoleCosmosToS3LambdaFunction
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Principal:
+            Service: "lambda.amazonaws.com"
+          Action: 'sts:AssumeRole'
+    Policies:
+      - PolicyName: "inline_policy_lambda_function_cw_logs"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - 'logs:*'
+              Resource: 'arn:aws:logs:*:*:*'
+
+
