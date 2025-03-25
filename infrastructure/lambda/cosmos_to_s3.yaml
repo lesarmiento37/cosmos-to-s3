@@ -5,7 +5,7 @@
     name: cosmos-to-s3-lambda-function
     role: iamRoleCosmosToS3LambdaFunction
     environment:
-      COSMOS_CONNECTION_STRING: ${ssm:/COSMOS_CONNECTION_STRING~true}
-      S3_BUCKET_NAME: ${ssm:/S3_BUCKET_NAME~true}
+      COSMOS_CONNECTION_STRING: '{{resolve:secretsmanager:leonardo:SecretString:COSMOS_CONNECTION_STRING}}'
+      S3_BUCKET_NAME: '{{resolve:secretsmanager:leonardo:SecretString:S3_BUCKET_NAME}}'
       DATABASE_NAME: cosmicworks
       CONTAINER_NAME: products
