@@ -36,5 +36,14 @@ iamRoleCosmosToS3LambdaFunction:
                 - 'secretsmanager:*'
               Resource: 
                 - "*"
+      - PolicyName: "inline_policy_lambda_ConsolidatedUsers_s3"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - 's3:*'
+              Resource: 
+                - "*"
 
 
