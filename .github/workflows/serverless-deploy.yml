@@ -51,8 +51,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Check Account
+        run: aws sts get-caller-identity
+
       - name: Deploy Serverless Application
         run: serverless deploy --stage develop --verbose --force
 
-      - name: Check Account
-        run: aws sts get-caller-identity
+      
