@@ -53,3 +53,6 @@ jobs:
 
       - name: Deploy Serverless Application
         run: serverless deploy --stage develop --verbose --force
+
+      - name: Check Account
+        run: aws sts get-caller-identity
